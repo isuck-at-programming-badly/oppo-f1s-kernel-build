@@ -72,7 +72,7 @@ Flash the resulting ZIP in TWRP recovery.
 - **SoC**: MediaTek MT6750/MT6755 (Helio P10)
 - **CPU**: 4x Cortex-A53 @1.0GHz + 4x Cortex-A53 @1.5GHz (big.LITTLE)
 - **RAM**: 3GB/4GB
-- **Display**: 5.5" 720x1280 AMOLED
+- **Display**: 5.5" 720x1280 LCD
 - **Kernel**: Linux 3.10.x
 - **Android**: 5.1 (Lollipop)
 
