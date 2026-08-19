@@ -118,10 +118,10 @@ static U32 calefuse3;
  * else, use interval*tscpu_polling_factor2
  */
 /* chip dependent */
-int tscpu_polling_trip_temp1 = 30000;
-int tscpu_polling_trip_temp2 = 20000;
+int tscpu_polling_trip_temp1 = 35000; /* Battery: poll at normal interval only above 35C (was 30C) */
+int tscpu_polling_trip_temp2 = 25000; /* Battery: poll at 2x interval below 25C (was 20C) */
 int tscpu_polling_factor1 = 1;
-int tscpu_polling_factor2 = 2;
+int tscpu_polling_factor2 = 4; /* Battery: poll at 4x interval when cool (was 2x) */
 
 #if MTKTSCPU_FAST_POLLING
 /* Combined fast_polling_trip_temp and fast_polling_factor,
@@ -129,12 +129,12 @@ it means polling_delay will be 1/5 of original interval
 after mtktscpu reports > 65C w/o exit point */
 
 #if defined (CONFIG_MTK_PMIC_CHIP_MT6353)
-int fast_polling_trip_temp = 50000;
+int fast_polling_trip_temp = 55000; /* Battery: fast polling above 55C only (was 50C) */
 #else
 int fast_polling_trip_temp = 70000;
 #endif
 
-int fast_polling_factor = 5;
+int fast_polling_factor = 3; /* Battery: less aggressive fast polling (was 5x) */
 int tscpu_cur_fp_factor = 1;
 int tscpu_next_fp_factor = 1;
 #endif

@@ -15,7 +15,7 @@ static unsigned short lz4k_matchlen_decode[128] =
 	    1033, 1559, 1040, 0, 780, 1308, 1039, 0, 1034, 1822, 1294, 0,
 };
 
-#ifdef CONFIG_UBIFS_FS
+
 static unsigned short lz4k_matchlen_decode_hc[256] =
     { 514, 772, 515, 1031, 514, 1029, 515, 1545, 514, 772, 515, 1288, 514, 1030, 515, 2061, 514,
 772, 515, 1031, 514, 1029, 515, 1551, 514, 772, 515, 1291, 514, 1030, 515, 0, 514, 772, 515, 1031, 514, 1029, 515, 1548, 514, 772, 515,
@@ -33,7 +33,6 @@ static unsigned short lz4k_matchlen_decode_hc[256] =
 	    515, 1031, 514, 1029, 515, 1548, 514, 772, 515, 1288, 514, 1030, 515, 2076, 514, 772,
 	    515, 1031, 514, 1029, 515, 1808, 514, 772, 515, 1291, 514, 1030, 515, 0,
 };
-#endif				/* CONFIG_UBIFS_FS */
 
 static unsigned short lz4k_matchoff_decode[128] =
     { 1028, 1336, 1040, 1600, 1032, 1568, 1292, 1888, 1028, 1556, 1040, 1852, 1032, 1576, 1304,
@@ -47,7 +46,7 @@ static unsigned short lz4k_matchoff_decode[128] =
 	    1564, 1040, 1880, 1032, 1584, 1304, 2176,
 };
 
-#ifdef CONFIG_UBIFS_FS
+
 static unsigned short lz4k_matchoff_decode_hc[128] =
     { 768, 1560, 1284, 1814, 768, 1836, 1296, 1876, 768, 1820, 1288, 1860, 768, 1856, 1548, 2160,
 768, 1793, 1284, 1822, 768, 1848, 1296, 2144, 768, 1828, 1288, 1868, 768, 1806, 1556, 2176, 768, 1560, 1284, 1818, 768, 1840, 1296, 2136,
@@ -58,7 +57,6 @@ static unsigned short lz4k_matchoff_decode_hc[128] =
 	    1548, 2172, 768, 1798, 1284, 1844, 768, 1852, 1296, 2156, 768, 1832, 1288, 1872, 768,
 	    1810, 1556, 2180,
 };
-#endif				/* CONFIG_UBIFS_FS */
 
 static unsigned short lz4k_literallen_decode[128] =
     { 257, 770, 257, 1029, 257, 1027, 257, 1543, 257, 770, 257, 1286, 257, 1028, 257, 1806, 257,
@@ -300,7 +298,7 @@ static int lz4k_decompress_simple(const unsigned char *in, size_t in_len, unsign
 	return 0;
 }
 
-#ifdef CONFIG_UBIFS_FS
+
 static int lz4k_decompress_hc(const unsigned char *in, size_t in_len, unsigned char *out,
 			      unsigned char *const op_end)
 {
@@ -470,7 +468,6 @@ static int lz4k_decompress_hc(const unsigned char *in, size_t in_len, unsigned c
 
 	return 0;
 }
-#endif				/* CONFIG_UBIFS_FS */
 
 int lz4k_decompress_safe(const unsigned char *in, size_t in_len, unsigned char *out,
 			 size_t *pout_len)
@@ -492,7 +489,7 @@ int lz4k_decompress_safe(const unsigned char *in, size_t in_len, unsigned char *
 	return result;
 }
 
-#ifdef CONFIG_UBIFS_FS
+
 
 int lz4k_decompress_ubifs(const unsigned char *in, size_t in_len, unsigned char *out,
 			  size_t *pout_len)
@@ -516,4 +513,3 @@ int lz4k_decompress_ubifs(const unsigned char *in, size_t in_len, unsigned char 
 
 	return result;
 }
-#endif				/* CONFIG_UBIFS_FS */

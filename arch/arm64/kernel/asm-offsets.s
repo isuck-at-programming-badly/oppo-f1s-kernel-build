@@ -1,4 +1,4 @@
-	.cpu generic+fp+simd
+	.cpu cortex-a53+fp+simd+crypto+crc
 	.file	"asm-offsets.c"
 // GNU C (GCC) version 4.9.x-google 20140827 (prerelease) (aarch64-linux-android)
 //	compiled by GNU C version 4.8, GMP version 5.0.5, MPFR version 3.1.1, MPC version 1.0.1
@@ -17,8 +17,9 @@
 // -isystem /tmp/aarch64-linux-android-4.9/bin/../lib/gcc/aarch64-linux-android/4.9.x-google/include
 // -include /app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/include/linux/kconfig.h
 // -MD arch/arm64/kernel/.asm-offsets.s.d arch/arm64/kernel/asm-offsets.c
-// -mbionic -mlittle-endian -mgeneral-regs-only -mabi=lp64
-// -auxbase-strip arch/arm64/kernel/asm-offsets.s -O2 -Wall -Wundef
+// -mbionic -mlittle-endian -mcpu=cortex-a53 -mtune=cortex-a53
+// -mgeneral-regs-only -mabi=lp64
+// -auxbase-strip arch/arm64/kernel/asm-offsets.s -O3 -Wall -Wundef
 // -Wstrict-prototypes -Wno-trigraphs -Werror=implicit-function-declaration
 // -Wno-format-security -Werror=format -Werror=int-to-pointer-cast
 // -Werror=pointer-to-int-cast -Wframe-larger-than=1400
@@ -34,37 +35,39 @@
 // -fdefer-pop -fdevirtualize -fdevirtualize-speculatively -fdwarf2-cfi-asm
 // -fearly-inlining -feliminate-unused-debug-types
 // -fexpensive-optimizations -fforward-propagate -ffunction-cse -fgcse
-// -fgcse-lm -fgnu-runtime -fgnu-unique -fguess-branch-probability
-// -fhoist-adjacent-loads -fident -fif-conversion -fif-conversion2
-// -findirect-inlining -finline -finline-atomics
-// -finline-functions-called-once -finline-small-functions -fipa-cp
-// -fipa-profile -fipa-pure-const -fipa-reference -fipa-sra
-// -fira-hoist-pressure -fira-share-save-slots -fira-share-spill-slots
+// -fgcse-after-reload -fgcse-lm -fgnu-runtime -fgnu-unique
+// -fguess-branch-probability -fhoist-adjacent-loads -fident
+// -fif-conversion -fif-conversion2 -findirect-inlining -finline
+// -finline-atomics -finline-functions -finline-functions-called-once
+// -finline-small-functions -fipa-cp -fipa-cp-clone -fipa-profile
+// -fipa-pure-const -fipa-reference -fipa-sra -fira-hoist-pressure
+// -fira-share-save-slots -fira-share-spill-slots
 // -fisolate-erroneous-paths-dereference -fivopts -fkeep-static-consts
 // -fleading-underscore -fmath-errno -fmerge-constants
 // -fmerge-debug-strings -fmove-loop-invariants -fomit-frame-pointer
 // -foptimize-strlen -fpartial-inlining -fpeel-codesize-limit -fpeephole
-// -fpeephole2 -fprefetch-loop-arrays -free -freg-struct-return
-// -freorder-blocks -freorder-functions -frerun-cse-after-loop
-// -fsched-critical-path-heuristic -fsched-dep-count-heuristic
-// -fsched-group-heuristic -fsched-interblock -fsched-last-insn-heuristic
-// -fsched-rank-heuristic -fsched-spec -fsched-spec-insn-heuristic
-// -fsched-stalled-insns-dep -fschedule-insns -fschedule-insns2
-// -fsection-anchors -fshow-column -fshrink-wrap -fsigned-zeros
-// -fsplit-ivs-in-unroller -fsplit-wide-types -fstrict-enum-precision
-// -fstrict-volatile-bitfields -fsync-libcalls -fthread-jumps
-// -ftoplevel-reorder -ftrapping-math -ftree-bit-ccp
+// -fpeephole2 -fpredictive-commoning -fprefetch-loop-arrays -free
+// -freg-struct-return -freorder-blocks -freorder-functions
+// -frerun-cse-after-loop -fsched-critical-path-heuristic
+// -fsched-dep-count-heuristic -fsched-group-heuristic -fsched-interblock
+// -fsched-last-insn-heuristic -fsched-rank-heuristic -fsched-spec
+// -fsched-spec-insn-heuristic -fsched-stalled-insns-dep -fschedule-insns
+// -fschedule-insns2 -fsection-anchors -fshow-column -fshrink-wrap
+// -fsigned-zeros -fsplit-ivs-in-unroller -fsplit-wide-types
+// -fstrict-enum-precision -fstrict-volatile-bitfields -fsync-libcalls
+// -fthread-jumps -ftoplevel-reorder -ftrapping-math -ftree-bit-ccp
 // -ftree-builtin-call-dce -ftree-ccp -ftree-ch -ftree-coalesce-vars
 // -ftree-copy-prop -ftree-copyrename -ftree-cselim -ftree-dce
 // -ftree-dominator-opts -ftree-dse -ftree-forwprop -ftree-fre
-// -ftree-loop-if-convert -ftree-loop-im -ftree-loop-ivcanon
-// -ftree-loop-optimize -ftree-loop-vectorize -ftree-parallelize-loops=
-// -ftree-phiprop -ftree-pre -ftree-pta -ftree-reassoc -ftree-scev-cprop
-// -ftree-sink -ftree-slsr -ftree-sra -ftree-switch-conversion
+// -ftree-loop-distribute-patterns -ftree-loop-if-convert -ftree-loop-im
+// -ftree-loop-ivcanon -ftree-loop-optimize -ftree-loop-vectorize
+// -ftree-parallelize-loops= -ftree-partial-pre -ftree-phiprop -ftree-pre
+// -ftree-pta -ftree-reassoc -ftree-scev-cprop -ftree-sink
+// -ftree-slp-vectorize -ftree-slsr -ftree-sra -ftree-switch-conversion
 // -ftree-tail-merge -ftree-ter -ftree-vrp -funit-at-a-time
-// -funroll-codesize-limit -fverbose-asm -fzero-initialized-in-bss
-// -mandroid -mbionic -mfix-cortex-a53-835769 -mgeneral-regs-only
-// -mlittle-endian -mlra -momit-leaf-frame-pointer
+// -funroll-codesize-limit -funswitch-loops -fverbose-asm
+// -fzero-initialized-in-bss -mandroid -mbionic -mfix-cortex-a53-835769
+// -mgeneral-regs-only -mlittle-endian -mlra -momit-leaf-frame-pointer
 
 	.section	.text.startup,"ax",%progbits
 	.align	2

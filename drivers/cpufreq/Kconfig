@@ -102,6 +102,18 @@ config CPU_FREQ_DEFAULT_GOV_INTERACTIVEPLUS
           'adapative' governor for latency-sensitive workloads. If unsure
           have a look at the help section of the driver. Fallback governor
           will be the performance governor.
+config CPU_FREQ_DEFAULT_GOV_BLU_ACTIVE
+        bool "blu_active"
+        select CPU_FREQ_GOV_BLU_ACTIVE
+        select CPU_FREQ_GOV_PERFORMANCE
+        help
+          Use the CPUFreq governor 'blu_active' as default. This allows
+          you to get a full dynamic cpu frequency capable system by simply
+          loading your cpufreq low-level hardware driver, using the
+          'blu_active' governor for latency-sensitive workloads with
+          target_residency and hotplug support. If unsure have a look at
+          the help section of the driver. Fallback governor will be the
+          performance governor.
 
 config CPU_FREQ_DEFAULT_GOV_CONSERVATIVE
 	bool "conservative"
@@ -241,6 +253,18 @@ config CPU_FREQ_GOV_INTERACTIVEPLUS
 
           For details, take a look at linux/Documentation/cpu-freq.
 
+config CPU_FREQ_GOV_BLU_ACTIVE
+        tristate "'blu_active' cpufreq policy governor"
+        select CPU_FREQ_TABLE
+        select CPU_FREQ_GOV_COMMON
+        help
+          'blu_active' - A governor based on interactive with boost pulse,
+          target_residency, and integrated hotplug driver for latency-sensitive
+          workloads.
+
+          For details, take a look at linux/Documentation/cpu-freq.
+
+          If in doubt, say N.
           If in doubt, say N.
 
 config CPU_FREQ_GOV_INTERACTIVE

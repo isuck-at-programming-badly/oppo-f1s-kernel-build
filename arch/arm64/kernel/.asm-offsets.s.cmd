@@ -1,4 +1,4 @@
-cmd_arch/arm64/kernel/asm-offsets.s := /tmp/aarch64-linux-android-4.9/bin/aarch64-linux-android-gcc -Wp,-MD,arch/arm64/kernel/.asm-offsets.s.d -nostdinc -isystem /tmp/aarch64-linux-android-4.9/bin/../lib/gcc/aarch64-linux-android/4.9.x-google/include -I/app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/arch/arm64/include -Iarch/arm64/include/generated  -Iinclude -I/app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/arch/arm64/include/uapi -Iarch/arm64/include/generated/uapi -I/app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/include/uapi -Iinclude/generated/uapi -include /app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/include/linux/kconfig.h -D__KERNEL__ -DVENDOR_EDIT -mlittle-endian -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -Werror=format -Werror=int-to-pointer-cast -Werror=pointer-to-int-cast -DVENDOR_EDIT -O2 -mgeneral-regs-only -fno-pic -Wframe-larger-than=1400 -fno-stack-protector -Wno-unused-but-set-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-var-tracking-assignments -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack   -DVENDOR_EDIT -D"KBUILD_STR(s)=#s" -D"KBUILD_BASENAME=KBUILD_STR(asm_offsets)"  -D"KBUILD_MODNAME=KBUILD_STR(asm_offsets)" -fverbose-asm -S -o arch/arm64/kernel/asm-offsets.s arch/arm64/kernel/asm-offsets.c
+cmd_arch/arm64/kernel/asm-offsets.s := /tmp/aarch64-linux-android-4.9/bin/aarch64-linux-android-gcc -Wp,-MD,arch/arm64/kernel/.asm-offsets.s.d -nostdinc -isystem /tmp/aarch64-linux-android-4.9/bin/../lib/gcc/aarch64-linux-android/4.9.x-google/include -I/app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/arch/arm64/include -Iarch/arm64/include/generated  -Iinclude -I/app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/arch/arm64/include/uapi -Iarch/arm64/include/generated/uapi -I/app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/include/uapi -Iinclude/generated/uapi -include /app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/include/linux/kconfig.h -D__KERNEL__ -DVENDOR_EDIT -mlittle-endian -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs -fno-strict-aliasing -fno-common -Werror-implicit-function-declaration -Wno-format-security -fno-delete-null-pointer-checks -Werror=format -Werror=int-to-pointer-cast -Werror=pointer-to-int-cast -DVENDOR_EDIT -O3 -mcpu=cortex-a53 -mtune=cortex-a53 -mgeneral-regs-only -fno-pic -Wframe-larger-than=1400 -fno-stack-protector -Wno-unused-but-set-variable -fno-omit-frame-pointer -fno-optimize-sibling-calls -fno-var-tracking-assignments -Wdeclaration-after-statement -Wno-pointer-sign -fno-strict-overflow -fconserve-stack   -DVENDOR_EDIT -D"KBUILD_STR(s)=#s" -D"KBUILD_BASENAME=KBUILD_STR(asm_offsets)"  -D"KBUILD_MODNAME=KBUILD_STR(asm_offsets)" -fverbose-asm -S -o arch/arm64/kernel/asm-offsets.s arch/arm64/kernel/asm-offsets.c
 
 source_arch/arm64/kernel/asm-offsets.s := arch/arm64/kernel/asm-offsets.c
 
@@ -185,6 +185,15 @@ deps_arch/arm64/kernel/asm-offsets.s := \
     $(wildcard include/config/broken/rodata.h) \
   include/linux/kern_levels.h \
   include/linux/dynamic_debug.h \
+  include/linux/string.h \
+    $(wildcard include/config/binary/printf.h) \
+  include/uapi/linux/string.h \
+  /app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/arch/arm64/include/asm/string.h \
+  include/linux/errno.h \
+  include/uapi/linux/errno.h \
+  arch/arm64/include/generated/asm/errno.h \
+  /app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/include/uapi/asm-generic/errno.h \
+  /app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/include/uapi/asm-generic/errno-base.h \
   include/uapi/linux/kernel.h \
   /app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/include/uapi/linux/sysinfo.h \
   include/linux/timex.h \
@@ -234,10 +243,6 @@ deps_arch/arm64/kernel/asm-offsets.s := \
   include/linux/rwlock_types.h \
   /app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/arch/arm64/include/asm/spinlock.h \
   /app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/arch/arm64/include/asm/processor.h \
-  include/linux/string.h \
-    $(wildcard include/config/binary/printf.h) \
-  include/uapi/linux/string.h \
-  /app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/arch/arm64/include/asm/string.h \
   /app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/arch/arm64/include/asm/fpsimd.h \
   /app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/arch/arm64/include/asm/hw_breakpoint.h \
   include/linux/rwlock.h \
@@ -290,11 +295,6 @@ deps_arch/arm64/kernel/asm-offsets.s := \
     $(wildcard include/config/debug/per/cpu/maps.h) \
     $(wildcard include/config/disable/obsolete/cpumask/functions.h) \
   include/linux/bitmap.h \
-  include/linux/errno.h \
-  include/uapi/linux/errno.h \
-  arch/arm64/include/generated/asm/errno.h \
-  /app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/include/uapi/asm-generic/errno.h \
-  /app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/include/uapi/asm-generic/errno-base.h \
   include/linux/nodemask.h \
     $(wildcard include/config/highmem.h) \
     $(wildcard include/config/movable/node.h) \

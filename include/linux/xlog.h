@@ -64,8 +64,8 @@ int __xlog_ksystem_printk(const struct xlog_record *rec, ...);
 		__xlog_ksystem_printk(&_xlog_rec, ##__VA_ARGS__);	\
 	})
 #else				/* CONFIG_HAVE_XLOG_PRINTK */
-//#define xlog_printk(prio, tag, fmt, ...) ((void)0)
-//#define xlog_ksystem_printk(prio, tag, fmt, ...)    ((void)0)
+#define xlog_printk(prio, tag, fmt, ...) ((void)0)
+#define xlog_ksystem_printk(prio, tag, fmt, ...) ((void)0)
 #endif				/* CONFIG_HAVE_XLOG_PRINTK */
 #endif				/* HAVE_ALE_FEATURE */
 

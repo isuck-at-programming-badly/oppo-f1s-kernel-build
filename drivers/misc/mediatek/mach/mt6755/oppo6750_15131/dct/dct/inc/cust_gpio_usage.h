@@ -256,3 +256,8 @@
 #define GPIO_MSDC0_DSL_M_GPIO   GPIO_MODE_00
 
 #endif
+
+/* OTG VBUS drive pin (PMIC-controlled, stub for compile) */
+#define GPIO_OTG_DRVVBUS_PIN          (GPIO0 | 0x80000000)
+#define GPIO_OTG_DRVVBUS_PIN_M_GPIO    GPIO_MODE_00
+#define GPIO_OTG_DRVVBUS_PIN_M_USB_DRVVBUS GPIO_MODE_01

@@ -1,0 +1,1 @@
+cmd_net/netfilter/xt_CHECKSUM.ko := /tmp/aarch64-linux-android-4.9/bin/aarch64-linux-android-ld -EL -r  -T /app/conversations/6a807cb012b12b33001d2a7d/oppo_f1s_rom/kernel/oppo/kernel-3.10/scripts/module-common.lds --build-id  -o net/netfilter/xt_CHECKSUM.ko net/netfilter/xt_CHECKSUM.o net/netfilter/xt_CHECKSUM.mod.o

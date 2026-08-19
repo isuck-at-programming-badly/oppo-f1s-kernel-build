@@ -1,0 +1,90 @@
+# 
+# Custom Oppo F1s (A1601) Kernel Configuration
+# MediaTek MT6750/MT6755 - Android 5.1 - Kernel 3.10.x
+#
+# Build: make oppo_a1601_custom_defconfig && make -j$(nproc)
+#
+
+# === Base config (from stock) ===
+CONFIG_ARCH_MTK=y
+CONFIG_ARCH_MT6750=y
+CONFIG_MTK_PLATFORM=mt6755
+CONFIG_ARM64=y
+CONFIG_HOTPLUG_CPU=y
+
+# === CPU Governors ===
+CONFIG_CPU_FREQ=y
+CONFIG_CPU_FREQ_DEFAULT_GOV_INTERACTIVE=y
+CONFIG_CPU_FREQ_GOV_INTERACTIVE=y
+CONFIG_CPU_FREQ_GOV_POWERSAVE=y
+CONFIG_CPU_FREQ_GOV_ONDEMAND=y
+CONFIG_CPU_FREQ_GOV_INTERACTIVEPLUS=y
+# CONFIG_CPU_FREQ_GOV_BLU_ACTIVE=y  # Added by sub-agent
+CONFIG_CPU_FREQ_GOV_CONSERVATIVE=y
+
+# === I/O Schedulers ===
+CONFIG_IOSCHED_NOOP=y
+CONFIG_IOSCHED_DEADLINE=y
+CONFIG_IOSCHED_CFQ=y
+# CONFIG_IOSCHED_BFQ=y  # Added by sub-agent
+# CONFIG_IOSCHED_ZEN=y   # Added by sub-agent
+# CONFIG_IOSCHED_MAPLE=y # Added by sub-agent
+CONFIG_DEFAULT_DEADLINE=y
+CONFIG_DEFAULT_IOSCHED="deadline"
+
+# === TCP Congestion Control ===
+CONFIG_TCP_CONG_ADVANCED=y
+CONFIG_TCP_CONG_CUBIC=y
+CONFIG_TCP_CONG_WESTWOOD=y
+CONFIG_DEFAULT_WESTWOOD=y
+CONFIG_DEFAULT_TCP_CONG="westwood"
+# Note: BBR requires kernel 4.9+, not available in 3.10
+
+# === ZRAM (Memory compression) ===
+CONFIG_ZSMALLOC=y
+CONFIG_ZRAM=y
+# CONFIG_ZRAM_DEBUG is not set
+CONFIG_CRYPTO_LZ4K=y
+# Note: ZSTD not available in 3.10, using LZ4K
+
+# === Memory Management ===
+# vm.swappiness=30 (set via sysctl at runtime)
+# vfs_cache_pressure=50 (set via sysctl at runtime)
+CONFIG_COMPACTION=y
+CONFIG_MIGRATION=y
+
+# === USB OTG ===
+CONFIG_USB_MTK_OTG=y
+CONFIG_MTK_OTG_PMIC_BOOST_5V=y
+CONFIG_MTK_OTG_OC_DETECTOR=y
+
+# === USB HID ===
+CONFIG_HID=y
+CONFIG_UHID=y
+CONFIG_HIDRAW=y
+
+# === Wireless / Monitor Mode ===
+CONFIG_CFG80211=y
+CONFIG_CFG80211_WEXT=y
+CONFIG_MAC80211=y
+# Note: MediaTek WiFi driver may need patches for monitor mode
+
+# === Netfilter / Packet Injection ===
+CONFIG_NETFILTER=y
+CONFIG_NETFILTER_XTABLES=y
+CONFIG_NETFILTER_XT_TARGET_TCPMSS=y
+CONFIG_NETFILTER_XT_MATCH_BPF=y
+CONFIG_NET_SCHED=y
+CONFIG_NET_SCH_HTB=y
+CONFIG_NET_CLS_U32=y
+CONFIG_NET_ACT_MIRRED=y
+
+# === Power Management ===
+CONFIG_PM=y
+CONFIG_PM_SLEEP=y
+CONFIG_SUSPEND=y
+# CONFIG_PM_DEBUG is not set
+
+# === Compiler Optimization ===
+# CONFIG_CC_OPTIMIZE_FOR_SIZE is not set
+# -O3 flag added in Makefile by sub-agent

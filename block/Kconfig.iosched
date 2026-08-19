@@ -39,6 +39,36 @@ config CFQ_GROUP_IOSCHED
 	---help---
 	  Enable group IO scheduling in CFQ.
 
+config IOSCHED_BFQ
+	tristate "BFQ (Budget Fair Queueing) I/O scheduler"
+	default y
+	---help---
+	  The BFQ I/O scheduler is a budget-based fair queueing scheduler
+	  that distributes bandwidth among processes according to their
+	  I/O priority weights. It provides fair and low-latency service
+	  and is particularly well-suited for interactive and multimedia
+	  workloads on desktop and mobile devices.
+
+	  This is a simplified implementation for kernel 3.10 that uses
+	  CFQ infrastructure with budget-based dispatch.
+
+config IOSCHED_ZEN
+	tristate "Zen I/O scheduler"
+	default y
+	---help---
+	  The Zen I/O scheduler prioritizes synchronous (read) requests
+	  over asynchronous (write) requests and dispatches in FIFO order
+	  within each category. It is designed for desktop and mobile use
+	  cases where read latency is important.
+
+config IOSCHED_MAPLE
+	tristate "Maple I/O scheduler"
+	default y
+	---help---
+	  The Maple I/O scheduler uses a single queue with deadline-based
+	  dispatch for low latency. It is a simple, lightweight scheduler
+	  suitable for low-latency workloads.
+
 choice
 	prompt "Default I/O scheduler"
 	default DEFAULT_CFQ
@@ -55,6 +85,15 @@ choice
 	config DEFAULT_NOOP
 		bool "No-op"
 
+	config DEFAULT_BFQ
+		bool "BFQ" if IOSCHED_BFQ=y
+
+	config DEFAULT_ZEN
+		bool "Zen" if IOSCHED_ZEN=y
+
+	config DEFAULT_MAPLE
+		bool "Maple" if IOSCHED_MAPLE=y
+
 endchoice
 
 config DEFAULT_IOSCHED
@@ -62,6 +101,9 @@ config DEFAULT_IOSCHED
 	default "deadline" if DEFAULT_DEADLINE
 	default "cfq" if DEFAULT_CFQ
 	default "noop" if DEFAULT_NOOP
+	default "bfq" if DEFAULT_BFQ
+	default "zen" if DEFAULT_ZEN
+	default "maple" if DEFAULT_MAPLE
 
 endmenu
 

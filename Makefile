@@ -676,9 +676,12 @@ all: vmlinux
 ifdef CONFIG_CC_OPTIMIZE_FOR_SIZE
 KBUILD_CFLAGS	+= -Os $(call cc-disable-warning,maybe-uninitialized,)
 else
-KBUILD_CFLAGS	+= -O2
+KBUILD_CFLAGS	+= -O3
 endif
 
+
+# Cortex-A53 CPU tuning for MT6750/MT6755 performance optimization
+KBUILD_CFLAGS += $(call cc-option,-mcpu=cortex-a53 -mtune=cortex-a53,)
 include $(srctree)/arch/$(SRCARCH)/Makefile
 
 ifdef CONFIG_READABLE_ASM
