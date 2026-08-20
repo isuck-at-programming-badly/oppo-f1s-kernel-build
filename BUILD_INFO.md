@@ -1,55 +1,63 @@
-# Oppo F1s Custom ROM & Kernel Build
+# Oppo F1s Custom Kernel - GSI Ready (Build 30)
 
-## ROM: Android 10 (LineageOS 17.1) - v2 FIXED
-- **File:** OppoF1s_Android10_v2_FIXED.zip (572.5MB)
-- **Base:** LineageOS 17.1 for Oppo A37 (MT6750, same chipset as F1s)
-- **Kernel:** Custom kernel-3.10 with all optimizations (swapped into boot.img)
-- **Boot logo:** Custom AOSP boot logo (flashed to logo partition)
-- **Root:** Magisk v23.0 (installed via updater-script)
+## Kernel: v3 (Build 30)
+- **Image:** Image.gz-dtb (7.7MB)
+- **Zero compilation errors** across 28,000+ lines
 
-## v2 Fixes (from v1)
-1. Removed device assertion that blocked F1s (only allowed a37f/A37fw)
-2. Added boot logo flashing to logo partition
-3. Added Magisk installation to updater-script
-4. Added A1601 to metadata pre-device list
+## What's New in v3 (GSI-critical)
+- CONFIG_FHANDLE=y (file handle ops for Android 10)
+- CONFIG_TMPFS_POSIX_ACL=y (SELinux permissions)
+- CONFIG_TMPFS_XATTR=y (extended attributes)
+- MTK-fixed boot cmdline (was Qualcomm, now MediaTek)
+- Verity disabled, SELinux permissive, vbmeta unlocked
 
-## Kernel: Build 29
-- **Image:** Image.gz-dtb (7.7MB, inserted into 8.6MB boot.img)
-- **Zero compilation errors**
+## Flashable ZIP
+- **File:** OppoF1s_GSI_Boot_v3.zip (8.5MB)
+- Flashes: boot.img (custom kernel) + logo.bin (custom boot logo)
 
-## Features
+## GSI Download (phh-treble Android 10)
+- Vanilla: https://github.com/phhusson/treble_experimentations/releases/download/v222/system-quack-arm32_binder64-aonly-vanilla.img.xz
+- GApps: https://github.com/phhusson/treble_experimentations/releases/download/v222/system-quack-arm32_binder64-aonly-gapps.img.xz
+- Image type: arm32_binder64-aonly (32-bit userspace, 64-bit binder, A-only partition)
+
+## Flashing Steps
+1. Flash OppoF1s_GSI_Boot_v3.zip in TWRP (kernel + logo)
+2. Download GSI, extract .img, flash to system partition
+3. Wipe data, cache, dalvik
+4. Reboot (first boot 5-10 min)
+
+## Boot Cmdline (MTK-fixed)
+```
+console=tty0 console=ttyMT3,921600n1 root=/dev/ram vmalloc=496M
+slub_max_order=0 androidboot.hardware=mt6735
+androidboot.bootdevice=mtk-msdc.0
+androidboot.selinux=permissive
+androidboot.veritymode=disabled
+androidboot.vbmeta.device_state=unlocked
+buildvariant=userdebug
+```
+
+## Kernel Features
 - Custom governors: blu_active, interactiveplus
 - Custom I/O schedulers: BFQ, Zen, Maple
 - TCP Westwood congestion control
 - ZRAM with LZ4K compression
-- NetHunter framework support (27 kernel modules)
+- NetHunter framework (27 modules)
 - KernelSU integration
-- Cortex-A53 optimizations (-O3)
-- VM tuning (swappiness=30, cache_pressure=50)
-- Custom boot logo (6 layers)
+- Cortex-A53 -O3 optimizations
+- Loop device support (for GSI vendor.img)
+- Seccomp filter (Android 10 requirement)
+- UINPUT (virtual input for phh-treble)
 
-## Flashing Instructions
-1. Boot into TWRP recovery (Vol-Up + Power)
-2. Backup ALL partitions (CRITICAL!)
-3. Wipe: System, Cache, Dalvik, Data
-4. Flash OppoF1s_Android10_v2_FIXED.zip
-5. Flash Android 10 GApps (arm64) if you need Google apps
-6. Reboot system
-7. First boot takes 5-10 minutes
-
-## Updater Script Flow
-1. Extract install files
-2. Backup system partition
-3. Patch system image (block_image_update)
-4. Restore system backup
-5. Flash custom kernel (boot.img -> boot partition)
-6. Flash custom boot logo (logo.bin -> logo partition)
-7. Install Magisk v23.0
+## Known Issues with A37 ROM (v1/v2)
+- A37 system image has wrong hardware configs (Qualcomm cmdline, A37 panel/touch/camera)
+- Would NOT boot on F1s
+- Replaced with GSI approach (hardware-agnostic system image)
 
 ## Fixes Applied During Build
 - LZ4K: removed #ifdef CONFIG_UBIFS_FS guard
 - xlog: added no-op stubs for disabled CONFIG_HAVE_XLOG_PRINTK
-- GPIO: restored cust_gpio_usage.h with all DCT pin definitions
+- GPIO: restored cust_gpio_usage.h with DCT pin definitions
 - GPIO: added GPIO_OTG_DRVVBUS_PIN stub for OTG VBUS
 - Touchscreen: added missing GPIO defines to focaltech driver
 - Scheduler: added debug_stubs.c for missing debug functions
